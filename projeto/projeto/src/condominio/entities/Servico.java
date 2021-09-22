@@ -1,8 +1,8 @@
 package condominio.entities;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
+
+import condominio.entities.enums.Status;
 
 public class Servico {
 	
@@ -10,17 +10,19 @@ public class Servico {
 	private Empresa empresa;
 	private Date data;
 	private String preco;
+	private Status status;
 	
 	
 	public Servico() {
 	}
 
 
-	public Servico(String tipo, Empresa empresa, Date data, String preco) {
+	public Servico(String tipo, Empresa empresa, Date data, String preco, Status status) {
 		this.tipo = tipo;
 		this.empresa = empresa;
 		this.data = data;
 		this.preco = preco;
+		this.status = status;
 	}
 
 
@@ -64,11 +66,14 @@ public class Servico {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Servico [tipo=" + tipo + ", empresa=" + empresa + ", data=" + data + ", preco=" + preco
-				+ "]";
+	public Status getStatus() {
+		return status;
 	}
-	
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	
 }

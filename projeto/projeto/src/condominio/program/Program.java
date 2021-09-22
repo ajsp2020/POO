@@ -8,87 +8,102 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.TimeZone;
 
+import condominio.entities.Cliente;
+import condominio.entities.Dados;
 import condominio.entities.Empresa;
 import condominio.entities.Endereco;
 import condominio.entities.Servico;
 
-public class Program {
 
-	public static void main(String[] args) throws ParseException {
+public class Program {
+	
+
+	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));	
-		//Date data = sdf.parse("25/08/2021");
+		Scanner sc = new Scanner(System.in);
+		int menu;
+		Dados condominio = new Cliente();
 		
+		do {
+			
+			System.out.println("Menu:");
+			System.out.println("0 - Sair.");
+			System.out.println("1 - Adicionar Condomínnio.");
+			System.out.println("2 - Adicionar Empresa.");
+			System.out.println("3 - Adicionar Serviço");
+			System.out.println("4 - Mostrar Dados");
+			menu = sc.nextInt();
+
 		
-		List<Servico> listaServicos;
-		
-		
-		System.out.println("Menu: ");
-		System.out.println("1 - Adicionar um serviço: ");
-		int menu = sc.nextInt();
-		
-		
-		switch (menu) {
-		case 1: {
-			// Continuar arrumando as classe de forma ser uma lista de servicos. 
-			
-			Servico servico = new Servico();
-			Endereco endereco;
-			Empresa empresa;
-			
-			System.out.println(servico);
-			
-			
-			
-			System.out.println("Nome:");
-			sc.nextLine();
-			String nome = sc.nextLine();
-			
-			
-			System.out.println("Endereco:");
-			
-			System.out.println("Rua:");
-			String rua = sc.nextLine();
-			
-			System.out.println("Numero");
-			String numero = sc.nextLine();
-			
-			System.out.println("CEP:");
-			String cep = sc.nextLine();
-			
-			System.out.println("Cidade:");
-			String cidade = sc.nextLine();
-			
-			System.out.println("Estado:");
-			String estado = sc.nextLine();
-			
-			System.out.println("Pais");
-			String pais = sc.nextLine();
-			
-			System.out.println("Telefone:");
-			String telefone = sc.nextLine();
-			
-			System.out.println("CNPJ");
-			String cnpj = sc.nextLine();
-			
-			
-			endereco = new Endereco(rua, numero, cep, cidade, estado, pais);
-			empresa = new Empresa(nome, endereco, telefone, cnpj);
-			
-			System.out.println(empresa);
-			
-			break;	
-			
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + menu);
-		}
-		
+			switch (menu) {
+			case 0: {
 				
+				break;
+			}
+			case 1: {
+				
+				System.out.print("Nome do Condomínio: ");
+				String nome = sc.nextLine(); // estou com problema em pegar o nome.
+				sc.nextLine();
+				System.out.println("Endereço do Condomínio");
+				
+				System.out.print("Rua: ");
+				String rua = sc.nextLine();
+				
+				System.out.print("Numero: ");
+				String numero = sc.nextLine();
+				
+				System.out.print("CEP: ");
+				String cep = sc.nextLine();
+				
+				System.out.print("Cidade: ");
+				String cidade = sc.nextLine();
+				
+				System.out.print("Estado: ");
+				String estado = sc.nextLine();
+				
+				System.out.print("Pais: ");
+				String pais = sc.nextLine();
+				
+				System.out.print("CNPJ: ");
+				String cnpj = sc.nextLine();
+				
+				System.out.print("Sindico: ");
+				String sindico = sc.nextLine();
+				
+				condominio = new Cliente(nome, 
+						new Endereco(rua, numero, cep, cidade, estado, pais), 
+						cnpj, 
+						sindico);
+					
+				break;
+			}
+			
+			case 2: {
+				
+				break;
+			}
+			case 3: {
+				
+				break;
+			}
+			case 4: {
+				
+				System.out.println(condominio);
+				
+				break;
+			}
+				
+			default:
+				break;
+			}
+			
+		}while(menu != 0);
+		
+		
 		sc.close();
+		
 	}
 
 }
