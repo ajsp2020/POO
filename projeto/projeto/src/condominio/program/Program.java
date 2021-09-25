@@ -13,84 +13,166 @@ import condominio.entities.Dados;
 import condominio.entities.Empresa;
 import condominio.entities.Endereco;
 import condominio.entities.Servico;
+import condominio.entities.Telefone;
 
 
 public class Program {
 	
+	public static Dados adicionaDados(String tipo) {
+		
+		Dados dados = new Dados();
+		Scanner sc = new Scanner(System.in);
+		if (tipo == "1") dados = new Empresa();
+		else if (tipo == "0") dados = new Cliente();
+		
+		Endereco endereco = new Endereco();
+		
+		System.out.print("Nome:");
+		dados.setNome(sc.nextLine());
+		
+		System.out.print("Rua: ");
+		endereco.setRua(sc.nextLine());
+		
+		System.out.print("Numero: ");
+		endereco.setNumero(sc.nextLine());
+		
+		System.out.print("CEP: ");
+		endereco.setCep(sc.nextLine());
+		
+		System.out.print("Cidade: ");
+		endereco.setCidade(sc.nextLine());
+		
+		System.out.print("Estado: ");
+		endereco.setEstado(sc.nextLine());
+		
+		System.out.print("Pais: ");
+		endereco.setPais(sc.nextLine());
+		
+		System.out.print("CNPJ: ");
+		dados.setCnpj(sc.nextLine());
+
+		
+		dados.setEndereco(endereco);
+	
+		
+		return dados;
+		
+	};
+	
+	
+	public static Telefone adicionaTelefone() {
+		
+		Scanner sc = new Scanner(System.in);
+		Telefone telefone = new Telefone();
+		
+		System.out.println("Telefone: ");
+		
+		System.out.print("Tipo: ");
+		telefone.setTipo(sc.nextLine());
+		
+		System.out.print("DDD: ");
+		telefone.setDdd(sc.nextLine());
+		
+		System.out.print("Numero: ");
+		telefone.setNumero(sc.nextLine());
+		
+		return telefone;
+		
+	};
 
 	public static void main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		int menu;
-		Dados condominio = new Cliente();
+		Cliente cliente = new Cliente();
+		Empresa empresa;
 		
 		do {
 			
 			System.out.println("Menu:");
 			System.out.println("0 - Sair.");
 			System.out.println("1 - Adicionar Condomínnio.");
-			System.out.println("2 - Adicionar Empresa.");
-			System.out.println("3 - Adicionar Serviço");
-			System.out.println("4 - Mostrar Dados");
+			System.out.println("2 - Adicionar Serviço");
+			System.out.println("3 - Mostrar Dados");
 			menu = sc.nextInt();
 
 		
 			switch (menu) {
+			
 			case 0: {
 				
 				break;
 			}
+			
 			case 1: {
 				
-				System.out.print("Nome do Condomínio: ");
-				String nome = sc.nextLine(); // estou com problema em pegar o nome.
+				// Pega os dados do condomínio:
+				Endereco endereco = new Endereco();
+				System.out.println("Nome do condomínio: ");
+
 				sc.nextLine();
+				
 				System.out.println("Endereço do Condomínio");
-				
-				System.out.print("Rua: ");
-				String rua = sc.nextLine();
-				
-				System.out.print("Numero: ");
-				String numero = sc.nextLine();
-				
-				System.out.print("CEP: ");
-				String cep = sc.nextLine();
-				
-				System.out.print("Cidade: ");
-				String cidade = sc.nextLine();
-				
-				System.out.print("Estado: ");
-				String estado = sc.nextLine();
-				
-				System.out.print("Pais: ");
-				String pais = sc.nextLine();
-				
-				System.out.print("CNPJ: ");
-				String cnpj = sc.nextLine();
+				Dados dados = adicionaDados("0");
+				cliente = (Cliente) dados;
 				
 				System.out.print("Sindico: ");
 				String sindico = sc.nextLine();
 				
-				condominio = new Cliente(nome, 
-						new Endereco(rua, numero, cep, cidade, estado, pais), 
-						cnpj, 
-						sindico);
+				cliente.setSindico(sindico);
 					
 				break;
 			}
 			
 			case 2: {
 				
+				Servico servico = new Servico();
+				Endereco endereco = new Endereco();
+				
+				// Tipo do serviço
+				String[] tipos = {"1 - Manutenção", 
+								"2 - Pintura",
+								"3 - Limpeza",
+								"4 - Troca"};
+				
+				System.out.println("Tipo de serviço: ");
+				
+				for(String lista : tipos) {
+					System.out.println(lista);
+				};
+				
+				System.out.print("Tipo: ");
+				int tipo = sc.nextInt();
+				
+				// Dados da empresa
+				System.out.println("Empresa");
+				Dados dados = adicionaDados("1");
+				empresa = (Empresa) dados; 
+				
+				Telefone telefone = adicionaTelefone();
+				empresa.addNumber(telefone);
+				
+				System.out.print(empresa);
+				
+				
+				// Data inicial
+				
+				
+				// Preço
+				
+				
+				// Status 
+				
+				
+				System.out.println(empresa.getTelefones());
+				
 				break;
 			}
+			
 			case 3: {
 				
-				break;
-			}
-			case 4: {
-				
-				System.out.println(condominio);
+				System.out.println(cliente);
 				
 				break;
 			}

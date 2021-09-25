@@ -6,32 +6,33 @@ import condominio.entities.enums.Status;
 
 public class Servico {
 	
-	private String tipo;
+	private Integer tipo;
 	private Empresa empresa;
-	private Date data;
+	private Date initialData;
 	private String preco;
 	private Status status;
 	
 	
 	public Servico() {
+		
 	}
 
 
-	public Servico(String tipo, Empresa empresa, Date data, String preco, Status status) {
+	public Servico(Integer tipo, Empresa empresa, Date initialData, String preco, Status status) {
 		this.tipo = tipo;
 		this.empresa = empresa;
-		this.data = data;
+		this.initialData = initialData;
 		this.preco = preco;
 		this.status = status;
 	}
 
 
-	public String getTipo() {	
+	public Integer getTipo() {	
 		return tipo;
 	}
 
 	
-	public void setTipo(String tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
 
@@ -47,12 +48,12 @@ public class Servico {
 
 
 	public Date getData() {
-		return data;
+		return initialData;
 	}
 
 
 	public void setData(Date data) {
-		this.data = data;
+		this.initialData = data;
 	}
 
 
