@@ -3,31 +3,30 @@ package condominio.program;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.TimeZone;
 
 import condominio.entities.Cliente;
 import condominio.entities.Dados;
 import condominio.entities.Empresa;
 import condominio.entities.Endereco;
 import condominio.entities.Servico;
+import condominio.entities.ServicoPeriodicos;
 import condominio.entities.Telefone;
+import condominio.entities.enums.Status;
 
 
 public class Program {
 	
 	public static Dados adicionaDados(String tipo) {
 		
-		Dados dados = new Dados();
+		Dados dados = new Cliente();
 		Scanner sc = new Scanner(System.in);
-		if (tipo == "1") dados = new Empresa();
-		else if (tipo == "0") dados = new Cliente();
+		if (tipo == "empresa") dados = new Empresa();
 		
 		Endereco endereco = new Endereco();
 		
-		System.out.print("Nome:");
+		System.out.print("Nome " + tipo +": ");
 		dados.setNome(sc.nextLine());
 		
 		System.out.print("Rua: ");
@@ -50,11 +49,9 @@ public class Program {
 		
 		System.out.print("CNPJ: ");
 		dados.setCnpj(sc.nextLine());
-
 		
 		dados.setEndereco(endereco);
 	
-		
 		return dados;
 		
 	};
@@ -65,7 +62,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		Telefone telefone = new Telefone();
 		
-		System.out.println("Telefone: ");
+		System.out.println(">>Telefone<< ");
 		
 		System.out.print("Tipo: ");
 		telefone.setTipo(sc.nextLine());
@@ -80,14 +77,14 @@ public class Program {
 		
 	};
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		int menu;
+
 		Cliente cliente = new Cliente();
-		Empresa empresa;
-		
+
+		int menu;
 		do {
 			
 			System.out.println("Menu:");
@@ -108,27 +105,26 @@ public class Program {
 			case 1: {
 				
 				// Pega os dados do condomínio:
-				Endereco endereco = new Endereco();
-				System.out.println("Nome do condomínio: ");
-
-				sc.nextLine();
 				
-				System.out.println("Endereço do Condomínio");
-				Dados dados = adicionaDados("0");
+				System.out.println(">>Endereço do Condomínio<<");
+				Dados dados = adicionaDados("Condominio");
 				cliente = (Cliente) dados;
 				
 				System.out.print("Sindico: ");
-				String sindico = sc.nextLine();
+				cliente.setSindico(sc.nextLine());
 				
-				cliente.setSindico(sindico);
 					
 				break;
 			}
 			
 			case 2: {
 				
+				
 				Servico servico = new Servico();
-				Endereco endereco = new Endereco();
+				Empresa empresa;
+				
+				System.out.print("É um serviço periódico? (s/n)"); // Mudar a pergunta??
+				char ch = sc.next().toLowerCase().charAt(0);
 				
 				// Tipo do serviço
 				String[] tipos = {"1 - Manutenção", 
@@ -136,37 +132,55 @@ public class Program {
 								"3 - Limpeza",
 								"4 - Troca"};
 				
-				System.out.println("Tipo de serviço: ");
+				System.out.println(">>Tipo de serviço<<");
 				
 				for(String lista : tipos) {
 					System.out.println(lista);
 				};
 				
 				System.out.print("Tipo: ");
-				int tipo = sc.nextInt();
+				servico.setTipo(sc.nextInt());
 				
+
 				// Dados da empresa
-				System.out.println("Empresa");
-				Dados dados = adicionaDados("1");
+				System.out.println(">>Empresa<<");
+				Dados dados = adicionaDados("empresa");
 				empresa = (Empresa) dados; 
 				
-				Telefone telefone = adicionaTelefone();
+				Telefone telefone = adicionaTelefone(); // Adicionar um método para adicionar mais um numero.
 				empresa.addNumber(telefone);
 				
-				System.out.print(empresa);
-				
-				
+				servico.setEmpresa(empresa); 
+					
 				// Data inicial
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				if(ch == 's') {
+					servico = new ServicoPeriodicos();
+				}
+				System.out.println();
+				System.out.print("Data Inicial (DD/MM/YYYY): ");
+				servico.setData(sdf.parse(sc.next()));
+				
+				if(servico instanceof ServicoPeriodicos) {
+					
+					System.out.print("Próxima data (DD/MM/YYYY): ");
+					((ServicoPeriodicos) servico).setNextDate(sdf.parse(sc.next()));
+				}
 				
 				
 				// Preço
+				System.out.print("Preço do serviço ");
+				servico.setPreco(sc.nextDouble());
 				
 				
 				// Status 
+				System.out.print("Status (NAO_INICIADO/INICIADO/COMPLETADO)");
+				servico.setStatus(Status.valueOf(sc.next()));
+			
+				cliente.addService(servico); // Adicionando o serviço 
 				
-				
-				System.out.println(empresa.getTelefones());
-				
+				//VER MÉTODO TO STRING
 				break;
 			}
 			

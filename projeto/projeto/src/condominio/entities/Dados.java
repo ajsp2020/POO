@@ -1,6 +1,6 @@
 package condominio.entities;
 
-public class Dados {
+public abstract class Dados {
 	
 	private String nome;
 	private Endereco endereco;
@@ -40,10 +40,5 @@ public class Dados {
 		this.cnpj = cnpj;
 	}
 
-	@Override
-	public String toString() {
-		return "Dados [nome=" + nome + ", endereco=" + endereco + ", cnpj=" + cnpj + "]";
-	}
-	
 	
 }

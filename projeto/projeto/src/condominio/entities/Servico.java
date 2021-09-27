@@ -9,7 +9,7 @@ public class Servico {
 	private Integer tipo;
 	private Empresa empresa;
 	private Date initialData;
-	private String preco;
+	private Double preco;
 	private Status status;
 	
 	
@@ -18,7 +18,7 @@ public class Servico {
 	}
 
 
-	public Servico(Integer tipo, Empresa empresa, Date initialData, String preco, Status status) {
+	public Servico(Integer tipo, Empresa empresa, Date initialData, Double preco, Status status) {
 		this.tipo = tipo;
 		this.empresa = empresa;
 		this.initialData = initialData;
@@ -57,12 +57,12 @@ public class Servico {
 	}
 
 
-	public String getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
 
-	public void setPreco(String preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -74,6 +74,13 @@ public class Servico {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Servico [tipo=" + tipo + ", empresa=" + empresa + ", initialData=" + initialData + ", preco=" + preco
+				+ ", status=" + status + "]";
 	}
 
 	

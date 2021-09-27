@@ -27,5 +27,13 @@ public class Empresa extends Dados{
 	public void removeNumber(Telefone telefone) {
 		this.telefones.remove(telefone);
 	}
+
+	@Override
+	public String toString() {
+		return "Empresa [telefones=" + telefones + ", Nome=" + getNome() + ", Endereco=" + getEndereco()
+				+ ", Cnpj=" + getCnpj() + "]";
+	}
+	
+	
 	
 }
