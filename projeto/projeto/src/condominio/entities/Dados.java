@@ -40,5 +40,10 @@ public abstract class Dados {
 		this.cnpj = cnpj;
 	}
 
+	@Override
+	public String toString() {
+		return "Dados [nome=" + nome + ", endereco=" + endereco + ", cnpj=" + cnpj + "]";
+	}
+
 	
 }
