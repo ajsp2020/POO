@@ -30,10 +30,10 @@ public class Empresa extends Dados{
 
 	@Override
 	public String toString() {
-		return "Empresa [telefones=" + telefones + ", Nome=" + getNome() + ", Endereco=" + getEndereco()
-				+ ", Cnpj=" + getCnpj() + "]";
+		return "Nome: " + getNome() 
+				+ "\nEndereco: " + getEndereco()
+				+ "\nCnpj: " + getCnpj()
+				+ "telefones: " + telefones ;
 	}
-	
-	
 	
 }

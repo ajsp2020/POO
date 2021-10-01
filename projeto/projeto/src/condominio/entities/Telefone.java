@@ -42,7 +42,9 @@ public class Telefone {
 
 	@Override
 	public String toString() {
-		return "Telefone [tipo=" + tipo + ", ddd=" + ddd + ", numero=" + numero + "]";
+		return "" + tipo + ":" 
+				+ "(" + ddd + ")" 
+				+ "numero" + numero;
 	}
 	
 	

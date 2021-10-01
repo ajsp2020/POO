@@ -1,6 +1,9 @@
 package condominio.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+
 
 import condominio.entities.enums.Status;
 
@@ -12,6 +15,7 @@ public class Servico {
 	private Double preco;
 	private Status status;
 	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public Servico() {
 		
@@ -53,6 +57,7 @@ public class Servico {
 
 
 	public void setData(Date data) {
+		
 		this.initialData = data;
 	}
 
@@ -60,10 +65,25 @@ public class Servico {
 	public Double getPreco() {
 		return preco;
 	}
+	
 
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+
+	public static boolean testaPreco(double preco) {
+		
+		if (preco < 0) {
+			System.out.println("O preço precisa ser um valor POSITIVO: ");
+			return true;
+		}
+		else {
+			
+			return false;
+		}
+		
 	}
 
 
@@ -79,8 +99,11 @@ public class Servico {
 
 	@Override
 	public String toString() {
-		return "Servico [tipo=" + tipo + ", empresa=" + empresa + ", initialData=" + initialData + ", preco=" + preco
-				+ ", status=" + status + "]";
+		return "\ntipo: " + tipo 
+				+ "\nEmpresa: " + empresa 
+				+ "\nData Inicial: " + sdf.format(initialData) 
+				+ "\nPreco: R$ " + String.format("%.2f", preco)
+				+ "\ntatus: " + status;
 	}
 
 	

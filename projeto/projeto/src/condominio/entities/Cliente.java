@@ -40,12 +40,14 @@ public class Cliente extends Dados{
 
 	@Override
 	public String toString() {
-		return "Cliente [servicos=" + 
-						servicos + 
-						", sindico=" + 
-						sindico + 
-						super.toString() 
-						+ "]";
+		return ">> Dados do Cliente <<"
+				+ "\nsindico: " + sindico 
+				+ "\nDados do condomínio:\n"
+				+ super.toString()
+				+ "\nservicos: " 
+				+ servicos 
+				+ 
+						 "";
 	}
 	
 	

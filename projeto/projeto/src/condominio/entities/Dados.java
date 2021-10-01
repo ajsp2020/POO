@@ -42,7 +42,9 @@ public abstract class Dados {
 
 	@Override
 	public String toString() {
-		return "Dados [nome=" + nome + ", endereco=" + endereco + ", cnpj=" + cnpj + "]";
+		return "Nome: " + nome 
+				+ "\nendereco: " + endereco 
+				+ "\ncnpj=" + cnpj;
 	}
 
 	

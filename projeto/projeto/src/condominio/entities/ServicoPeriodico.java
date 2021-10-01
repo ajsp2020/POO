@@ -4,15 +4,15 @@ import java.util.Date;
 
 import condominio.entities.enums.Status;
 
-public class ServicoPeriodicos extends Servico{
+public class ServicoPeriodico extends Servico{
 
 	private Date nextDate;
 	
-	public ServicoPeriodicos() {
+	public ServicoPeriodico() {
 		super();
 	}
 
-	public ServicoPeriodicos(Integer tipo, Empresa empresa, Date initialData, Double preco, Status status,
+	public ServicoPeriodico(Integer tipo, Empresa empresa, Date initialData, Double preco, Status status,
 			Date nextDate) {
 		super(tipo, empresa, initialData, preco, status);
 		this.nextDate = nextDate;
