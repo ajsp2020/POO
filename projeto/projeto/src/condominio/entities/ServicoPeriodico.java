@@ -3,6 +3,7 @@ package condominio.entities;
 import java.util.Date;
 
 import condominio.entities.enums.Status;
+import condominio.entities.enums.TiposDeServico;
 
 public class ServicoPeriodico extends Servico{
 
@@ -12,7 +13,7 @@ public class ServicoPeriodico extends Servico{
 		super();
 	}
 
-	public ServicoPeriodico(Integer tipo, Empresa empresa, Date initialData, Double preco, Status status,
+	public ServicoPeriodico(TiposDeServico tipo, Empresa empresa, Date initialData, Double preco, Status status,
 			Date nextDate) {
 		super(tipo, empresa, initialData, preco, status);
 		this.nextDate = nextDate;

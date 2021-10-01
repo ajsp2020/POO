@@ -3,7 +3,6 @@ package condominio.application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 import condominio.entities.Cliente;
@@ -14,74 +13,19 @@ import condominio.entities.Servico;
 import condominio.entities.ServicoPeriodico;
 import condominio.entities.Telefone;
 import condominio.entities.enums.Status;
+import condominio.entities.enums.TiposDeServico;
 
 
 public class UI {
 	
-		
-		public static void menu() throws ParseException {
-			
-			Locale.setDefault(Locale.US);
-			Scanner sc = new Scanner(System.in);
-
-			Cliente cliente = new Cliente();
-			int opt;
-			do {
-				
-				System.out.println("Menu:");
-				System.out.println("0 - Sair.");
-				System.out.println("1 - Adicionar Condomínnio.");
-				System.out.println("2 - Adicionar Serviço");
-				System.out.println("3 - Mostrar Dados");
-				opt = sc.nextInt();
-
-			
-				switch (opt) {
-				
-				case 0: {
-					
-					break;
-				}
-				
-				case 1: {
-					
-					cliente = criaCondominio(cliente, sc);
-					
-					break;
-				}
-				
-				case 2: {
-					
-					cliente.addService(criaServico(sc));
-					
-					break;
-				}
-				
-				case 3: {
-		
-					System.out.println(cliente);
-					
-					break;
-				}
-					
-				default:
-					
-					break;
-				}
-				
-			}while(opt != 0);
-			
-			
-			sc.close();
-		
-
-		}
-
-		
+	
+	public static void clearScreen() { 
+		 //System.out.print("\033[H\033[2J"); 
+		 System.out.flush(); 
+		} 
 	
 	public static Cliente criaCondominio(Cliente cliente, Scanner sc) {
 
-		System.out.println(">>Endereço do Condomínio<<");
 		Dados dados = adicionaDados(cliente, sc);
 		cliente = (Cliente) dados;
 		
@@ -137,10 +81,6 @@ public class UI {
 	};
 
 	public static Dados adicionaDados(Dados dados, Scanner sc) {
-		
-		
-		if (dados instanceof Cliente) dados = new Cliente();
-		else if(dados instanceof Empresa) dados = new Empresa();
 		
 		Endereco endereco = new Endereco();
 		
@@ -207,13 +147,14 @@ public class UI {
 		
 		for(String lista : tipos) {
 			System.out.println(lista);
-		};
+		}
+	
 		
 		System.out.print("Tipo: ");
-		servico.setTipo(sc.nextInt());
+		servico.setTipo(TiposDeServico.pegaServicos(sc.next()));
 		
 		return servico;
-	};
+	}
 	
 	public static Empresa addEmpresa(Scanner sc) {
 		Empresa empresa = new Empresa();
@@ -223,11 +164,16 @@ public class UI {
 		empresa = (Empresa) dados; 
 		
 		
-		System.out.println("Deseja adicionar um numero?");
-		char ch2 = sc.next().toLowerCase().charAt(0);
+		System.out.println("Deseja adicionar um numero? (S/N)");
+		char ch = sc.next().toLowerCase().charAt(0);
 		
-		Telefone telefone = adicionaTelefone(sc); // Adicionar um método para adicionar mais um numero.
-		empresa.addNumber(telefone);
+		if (ch == 's') {
+			
+			Telefone telefone = adicionaTelefone(sc); 
+			empresa.addNumber(telefone);
+		}
+		// Adicionar um método para adicionar mais um numero.
+		
 		
 		return empresa;
 	};

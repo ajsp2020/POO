@@ -3,13 +3,12 @@ package condominio.entities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
 import condominio.entities.enums.Status;
+import condominio.entities.enums.TiposDeServico;
 
 public class Servico {
 	
-	private Integer tipo;
+	private TiposDeServico tipo;
 	private Empresa empresa;
 	private Date initialData;
 	private Double preco;
@@ -22,7 +21,7 @@ public class Servico {
 	}
 
 
-	public Servico(Integer tipo, Empresa empresa, Date initialData, Double preco, Status status) {
+	public Servico(TiposDeServico tipo, Empresa empresa, Date initialData, Double preco, Status status) {
 		this.tipo = tipo;
 		this.empresa = empresa;
 		this.initialData = initialData;
@@ -31,12 +30,12 @@ public class Servico {
 	}
 
 
-	public Integer getTipo() {	
+	public TiposDeServico getTipo() {	
 		return tipo;
 	}
 
 	
-	public void setTipo(Integer tipo) {
+	public void setTipo(TiposDeServico tipo) {
 		this.tipo = tipo;
 	}
 
