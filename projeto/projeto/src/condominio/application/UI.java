@@ -16,22 +16,32 @@ import condominio.entities.enums.Status;
 import condominio.entities.enums.TiposDeServico;
 import condominio.entities.enums.TiposDeTelefone;
 import condominio.exceptions.ProgramException;
-
 public class UI {
+	
+	protected static boolean clienteExiste(Cliente cliente) {
+		if(cliente != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean aceita (Scanner sc) {
+		char ch = sc.next().toLowerCase().charAt(0);	
+		
+		if (ch == 's') {
+			return true;
+		}
+		return false;
+	}
 
-	public static void checaCliente(Cliente cliente) {
+	protected static void checaCliente(Cliente cliente) {
 		if (cliente == null) {
 			throw new ProgramException("Adicione um cliente");
 
 		}
 	}
 
-	public static void clearScreen() {
-		// System.out.print("\033[H\033[2J");
-		System.out.flush();
-	}
-
-	public static Cliente addDadosCondominio(Cliente cliente, Scanner sc) {
+	protected static Cliente addDadosCondominio(Cliente cliente, Scanner sc) {
 
 		Dados dados = criaDados(cliente, sc);
 		cliente = (Cliente) dados;
@@ -42,13 +52,14 @@ public class UI {
 		return cliente;
 	};
 
-	public static Servico criaServico(Scanner sc) {
+	protected static Servico criaServico(Scanner sc) {
 
 		Servico servico = new Servico();
 
 		System.out.print("É um serviço periódico? (s/n): "); // Mudar a pergunta??
-		char ch = sc.next().toLowerCase().charAt(0);
-		if (ch == 's') {
+		System.out.print(">>> ");
+
+		if (aceita(sc)) {
 			servico = new ServicoPeriodico();
 		}
 
@@ -64,8 +75,9 @@ public class UI {
 		servico.setEmpresa(criaEmpresa(sc));
 
 		System.out.println("Deseja adicionar uma data específica? (S/N)");
-		char ch = sc.next().toLowerCase().charAt(0);
-		if (ch == 's') {// alterar
+		System.out.print(">>> ");
+
+		if (aceita(sc)) {// alterar
 			System.out.print("Data Inicial (DD/MM/YYYY): ");
 			servico.setData(criaData(sc));
 
@@ -83,12 +95,13 @@ public class UI {
 
 	private static Dados criaDados(Dados dados, Scanner sc) {
 
-		System.out.print("Nome: ");
 		sc.nextLine();
+		System.out.print("Nome: ");
 		dados.setNome(sc.nextLine());
 
 		dados.setEndereco(criaEndereco(sc));
 
+		sc.nextLine();
 		System.out.print("CNPJ: ");
 		dados.setCnpj(sc.nextLine());
 
@@ -98,9 +111,15 @@ public class UI {
 	private static Endereco criaEndereco(Scanner sc) {
 
 		Endereco endereco = new Endereco();
+		
+		System.out.println("Deseja adicionar o endereço?");
+		System.out.print(">>> ");
 
-		addDadosEndereco(endereco, sc);
-
+		if (aceita(sc)) {
+			addDadosEndereco(endereco, sc);
+		}
+		
+		
 		return endereco;
 
 	};
@@ -108,7 +127,8 @@ public class UI {
 	private static void addDadosEndereco(Endereco endereco, Scanner sc) {
 
 		try { // Validar os endereco!!
-
+			sc.nextLine();
+			
 			System.out.print("Rua: ");
 			endereco.setRua(sc.nextLine());
 
@@ -139,6 +159,7 @@ public class UI {
 
 		Telefone telefone = new Telefone();
 
+		sc.nextLine();
 		addDadosTelefone(telefone, sc);
 
 		return telefone;
@@ -149,7 +170,6 @@ public class UI {
 
 		try {
 			System.out.println("Tipo: \n1 - FIXO \n2 - CELULAR ");
-			sc.nextLine();
 			System.out.print(">>> ");
 			telefone.setTipo(TiposDeTelefone.pegaTelefones(sc.nextLine()));
 
@@ -240,7 +260,8 @@ public class UI {
 
 	private static String addStatus(Scanner sc) {
 
-		System.out.print("Status: \n1 - NAO_INICIADO \n2 - INICIADO \n3 - COMPLETADO \n4 - OUTROS: ");
+		System.out.println("Status: \n1 - NAO_INICIADO \n2 - INICIADO \n3 - COMPLETADO \n4 - OUTROS: ");
+		System.out.print(">>> ");
 		String valor = sc.nextLine();
 
 		return valor;

@@ -58,7 +58,7 @@ public class Telefone {
 	}
 	
 	private void validaNumero(String numero) {
-		if (ddd.length() != 9) {
+		if (numero.length() != 9) {
 			throw new ProgramException("Adicione um número válido");
 		}
 	}

@@ -14,6 +14,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		Cliente cliente = null;
+	
 
 		boolean sair = false;
 
@@ -27,8 +28,9 @@ public class Program {
 			System.out.println("4 - Mostrar Serviços");
 			System.out.println("5 - Mostrar Empresas");
 
-			System.out.print(">>>");
+			System.out.print(">>> ");
 			int opt = sc.nextInt();
+			
 
 			switch (opt) {
 
@@ -41,7 +43,7 @@ public class Program {
 
 			case 1: {
 
-				if (cliente == null) { // Checando se o cliente existe
+				if (!UI.clienteExiste(cliente)) { // Checando se o cliente existe
 					cliente = UI.addDadosCondominio(new Cliente(), sc);
 				} else {
 
@@ -63,7 +65,7 @@ public class Program {
 
 			case 2: {
 
-				if (cliente == null) { // Checando se o cliente existe
+				if (UI.clienteExiste(cliente)) { // Checando se o cliente existe
 					System.out.println("Adicione um cliente.");
 					sc.nextLine();
 					sc.nextLine(); // Tem dois pq o p1rograma não esta parando com um só
@@ -77,63 +79,68 @@ public class Program {
 			}
 
 			case 3: {
-
-				System.out.println(cliente);
+				if (UI.clienteExiste(cliente)) {
+					
+					System.out.println(cliente);
+				}
 
 				break;
 			}
 
 			case 4: {
-				System.out.println("1 - Serviços posteriores a data de hoje:");
-				System.out.println("2 - Serviços por data específica:");
-				System.out.println("3 - Todos os serviços");
-
-				System.out.print(">>>");
-				opt = sc.nextInt();
-
-				switch (opt) {
-
-				case 1: {
-					Date agora = new Date();
-
-					for (Servico servico : cliente.getServicos()) {
-						if (servico.getData().after(agora)) {
-							System.out.println(servico);
+				if (UI.clienteExiste(cliente)) {
+					System.out.println("1 - Serviços posteriores a data de hoje:");
+					System.out.println("2 - Serviços por data específica:");
+					System.out.println("3 - Todos os serviços");
+	
+					System.out.print(">>>");
+					opt = sc.nextInt();
+	
+						switch (opt) {
+		
+						case 1: {
+							Date agora = new Date();
+		
+							for (Servico servico : cliente.getServicos()) {
+								if (servico.getData().after(agora)) {
+									System.out.println(servico);
+								}
+							}
+							break;
 						}
-					}
-					break;
-				}
-				case 2: {
-					System.out.println("A partir de qual data?");
-					Date data = UI.criaData(sc);
-
-					for (Servico servico : cliente.getServicos()) {
-						if (servico.getData().after(data)) {
-							System.out.println(servico);
+						case 2: {
+							System.out.println("A partir de qual data?");
+							Date data = UI.criaData(sc);
+		
+							for (Servico servico : cliente.getServicos()) {
+								if (servico.getData().after(data)) {
+									System.out.println(servico);
+								}
+							}
+		
+							break;
 						}
+						case 3: {
+							System.out.println(cliente.getServicos());
+		
+							break;
+						}
+						default: {
+							break;
+						}
+	
 					}
-
-					break;
+	
 				}
-				case 3: {
-					System.out.println(cliente.getServicos());
-
-					break;
-				}
-				default: {
-					break;
-				}
-
-				}
-
+				break;
 			}
 			case 5 :{
-				
-				for (Servico servico : cliente.getServicos()) {
-					System.out.println(servico.getEmpresa());
+				if (UI.clienteExiste(cliente)) {
+					for (Servico servico : cliente.getServicos()) {
+						System.out.println(servico.getEmpresa());
+					}
 				}
-				
-				
+			
 				break;
 			}
 

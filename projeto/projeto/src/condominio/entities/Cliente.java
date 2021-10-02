@@ -3,6 +3,8 @@ package condominio.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import condominio.application.UI;
+
 // Criando uma classe cliente e adicionando os métodos. 
 public class Cliente extends Dados{
 	
@@ -37,6 +39,7 @@ public class Cliente extends Dados{
 	public void setSindico(String sindico) {
 		this.sindico = sindico;
 	}
+	
 
 	@Override
 	public String toString() {
