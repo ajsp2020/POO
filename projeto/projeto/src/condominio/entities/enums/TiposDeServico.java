@@ -7,7 +7,7 @@ public enum TiposDeServico {
 	MANUTENCAO("1"),
 	PINTURA("2"),
 	LIMPEZA("3"),
-	TROCA("4");
+	SUBSTITUICAO("4");
 
 	
 	private String valor;
@@ -31,6 +31,7 @@ public enum TiposDeServico {
 	public static TiposDeServico pegaServicos(String valor) {
 		return ServicosPorValor.get(valor);
 	}
+	
 
 }
  

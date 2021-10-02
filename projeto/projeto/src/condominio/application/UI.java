@@ -14,196 +14,236 @@ import condominio.entities.ServicoPeriodico;
 import condominio.entities.Telefone;
 import condominio.entities.enums.Status;
 import condominio.entities.enums.TiposDeServico;
-
+import condominio.entities.enums.TiposDeTelefone;
+import condominio.exceptions.ProgramException;
 
 public class UI {
-	
-	
-	public static void clearScreen() { 
-		 //System.out.print("\033[H\033[2J"); 
-		 System.out.flush(); 
-		} 
-	
-	public static Cliente criaCondominio(Cliente cliente, Scanner sc) {
 
-		Dados dados = adicionaDados(cliente, sc);
+	public static void checaCliente(Cliente cliente) {
+		if (cliente == null) {
+			throw new ProgramException("Adicione um cliente");
+
+		}
+	}
+
+	public static void clearScreen() {
+		// System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
+	public static Cliente addDadosCondominio(Cliente cliente, Scanner sc) {
+
+		Dados dados = criaDados(cliente, sc);
 		cliente = (Cliente) dados;
-		
+
 		System.out.print("Sindico: ");
 		cliente.setSindico(sc.nextLine());
-		
+
 		return cliente;
 	};
-	
-	public static Servico criaServico(Scanner sc) throws ParseException {
-		
-		
+
+	public static Servico criaServico(Scanner sc) {
+
 		Servico servico = new Servico();
-		
+
 		System.out.print("É um serviço periódico? (s/n): "); // Mudar a pergunta??
 		char ch = sc.next().toLowerCase().charAt(0);
 		if (ch == 's') {
 			servico = new ServicoPeriodico();
 		}
-		
-		// Tipo do serviço
-		servico = addTipos(servico, sc);
-		
-		// Dados da empresa
-		
-		servico.setEmpresa(addEmpresa(sc)); 
-			
-		// Datas do servico
-		System.out.println();
-		System.out.print("Data Inicial (DD/MM/YYYY): ");
-		servico.setData(addData(sc));
-		
-		if(servico instanceof ServicoPeriodico) {
-			System.out.print("Proxima Data Inicial (DD/MM/YYYY): ");
-			((ServicoPeriodico)servico).setNextDate(addData(sc));
-			
-		}
-		
-		// Preço
-		Double preco;
-		do {
-			
-			preco = Preco(sc);
-			servico.setPreco(preco);
-			
-		}while (servico.testaPreco(preco));
-		// Status 
-		
-		servico = addStatus(servico, sc);
-		
-		//VER MÉTODO TO STRING
+
+		addDadosServico(servico, sc);
+
 		return servico;
+	}
+
+	private static void addDadosServico(Servico servico, Scanner sc) {
+
+		servico.setTipo(TiposDeServico.pegaServicos(addTipos(sc)));
+
+		servico.setEmpresa(criaEmpresa(sc));
+
+		System.out.println("Deseja adicionar uma data específica? (S/N)");
+		char ch = sc.next().toLowerCase().charAt(0);
+		if (ch == 's') {// alterar
+			System.out.print("Data Inicial (DD/MM/YYYY): ");
+			servico.setData(criaData(sc));
+
+			if (servico instanceof ServicoPeriodico) {
+				System.out.print("Proxima Data Inicial (DD/MM/YYYY): ");
+				((ServicoPeriodico) servico).setNextDate(criaData(sc));
+			}
+		}
+
+		addPreco(servico, sc);
+
+		servico.setStatus(Status.pegaServicos(addStatus(sc)));
+
 	};
 
-	public static Dados adicionaDados(Dados dados, Scanner sc) {
-		
-		Endereco endereco = new Endereco();
-		
+	private static Dados criaDados(Dados dados, Scanner sc) {
+
 		System.out.print("Nome: ");
 		sc.nextLine();
 		dados.setNome(sc.nextLine());
-		
-		System.out.print("Rua: ");
-		endereco.setRua(sc.nextLine());
-		
-		System.out.print("Numero: ");
-		endereco.setNumero(sc.nextLine());
-		
-		System.out.print("CEP: ");
-		endereco.setCep(sc.nextLine());
-		
-		System.out.print("Cidade: ");
-		endereco.setCidade(sc.nextLine());
-		
-		System.out.print("Estado: ");
-		endereco.setEstado(sc.nextLine());
-		
-		System.out.print("Pais: ");
-		endereco.setPais(sc.nextLine());
-		
+
+		dados.setEndereco(criaEndereco(sc));
+
 		System.out.print("CNPJ: ");
 		dados.setCnpj(sc.nextLine());
-		
-		dados.setEndereco(endereco);
-	
+
 		return dados;
-		
+	}
+
+	private static Endereco criaEndereco(Scanner sc) {
+
+		Endereco endereco = new Endereco();
+
+		addDadosEndereco(endereco, sc);
+
+		return endereco;
+
 	};
-	
-	
-	public static Telefone adicionaTelefone(Scanner sc) {
-		
+
+	private static void addDadosEndereco(Endereco endereco, Scanner sc) {
+
+		try { // Validar os endereco!!
+
+			System.out.print("Rua: ");
+			endereco.setRua(sc.nextLine());
+
+			System.out.print("Numero: ");
+			endereco.setNumero(sc.nextLine());
+
+			System.out.print("CEP: ");
+			endereco.setCep(sc.nextLine());
+
+			System.out.print("Cidade: ");
+			endereco.setCidade(sc.nextLine());
+
+			System.out.print("Estado: ");
+			endereco.setEstado(sc.nextLine());
+
+			System.out.print("Pais: ");
+			endereco.setPais(sc.nextLine());
+
+		} catch (ProgramException e) {
+			System.out.println(e.getMessage());
+			sc.nextLine();
+			addDadosEndereco(endereco, sc);
+		}
+
+	}
+
+	private static Telefone criaNoTelefone(Scanner sc) {
+
 		Telefone telefone = new Telefone();
-		
-		System.out.println(">>Telefone<< ");
-		
-		System.out.print("Tipo: ");
-		sc.nextLine();
-		telefone.setTipo(sc.nextLine());
-		
-		System.out.print("DDD: ");
-		telefone.setDdd(sc.nextLine());
-		
-		System.out.print("Numero: ");
-		telefone.setNumero(sc.nextLine());
-		
+
+		addDadosTelefone(telefone, sc);
+
 		return telefone;
-		
+
 	};
-	
-	public static Servico addTipos(Servico servico, Scanner sc) {
-		
-		String[] tipos = {"1 - Manutenção", 
-						"2 - Pintura",
-						"3 - Limpeza",
-						"4 - Troca"};
-		
-		System.out.println(">>Tipo de serviço<<");
-		
-		for(String lista : tipos) {
+
+	private static void addDadosTelefone(Telefone telefone, Scanner sc) {
+
+		try {
+			System.out.println("Tipo: \n1 - FIXO \n2 - CELULAR ");
+			sc.nextLine();
+			System.out.print(">>> ");
+			telefone.setTipo(TiposDeTelefone.pegaTelefones(sc.nextLine()));
+
+			System.out.print("DDD: ");
+			telefone.setDdd(sc.nextLine());
+
+			System.out.print("Numero: ");
+			telefone.setNumero(sc.nextLine());
+		} catch (ProgramException e) {
+			System.out.println(e.getMessage());
+			sc.nextLine();
+			addDadosTelefone(telefone, sc);
+		}
+
+	}
+
+	private static String addTipos(Scanner sc) {
+
+		String[] tipos = { "1 - MANUTENÇÃO", "2 - PINTURA", "3 - LIMPEZA", "4 - SUBSTITUIÇÃO" };
+
+		for (String lista : tipos) {
 			System.out.println(lista);
 		}
-	
-		
+
 		System.out.print("Tipo: ");
-		servico.setTipo(TiposDeServico.pegaServicos(sc.next()));
-		
-		return servico;
+		String valor = sc.next();
+
+		return valor;
 	}
-	
-	public static Empresa addEmpresa(Scanner sc) {
+
+	private static Empresa criaEmpresa(Scanner sc) {
+
 		Empresa empresa = new Empresa();
-		
-		System.out.println(">>Empresa<<");
-		Dados dados = adicionaDados(empresa, sc);
-		empresa = (Empresa) dados; 
-		
-		
-		System.out.println("Deseja adicionar um numero? (S/N)");
-		char ch = sc.next().toLowerCase().charAt(0);
-		
-		if (ch == 's') {
-			
-			Telefone telefone = adicionaTelefone(sc); 
-			empresa.addNumber(telefone);
-		}
-		// Adicionar um método para adicionar mais um numero.
-		
-		
+
+		addDadosEmpresa(empresa, sc);
+
 		return empresa;
 	};
-	
-	public static Date addData(Scanner sc ) throws ParseException {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date data;
-	
-		data = sdf.parse(sc.next());
-		
+
+	private static void addDadosEmpresa(Empresa empresa, Scanner sc) {
+
+		Dados dados = criaDados(empresa, sc);
+		empresa = (Empresa) dados;
+
+		System.out.println("Deseja adicionar um numero? (S/N)");
+		char ch = sc.next().toLowerCase().charAt(0);
+
+		if (ch == 's') {
+
+			Telefone telefone = criaNoTelefone(sc);
+			empresa.addNumber(telefone);
+		}
+
+	}
+
+	protected static Date criaData(Scanner sc) {
+
+		Date data = new Date();
+
+		modificaData(data, sc);
+
 		return data;
+	}
+
+	private static void modificaData(Date data, Scanner sc) {
+
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			data = sdf.parse(sc.next());
+		} catch (ParseException e) {
+			System.out.println("Invalid date format");
+		}
+
 	};
-	
-	public static Double Preco(Scanner sc) {
-		
-		System.out.print("Preço do serviço R$: ");
-		Double preco = sc.nextDouble();
-		
-		return preco;
-			
+
+	private static void addPreco(Servico servico, Scanner sc) {
+
+		try {
+			System.out.print("Preço do serviço R$: ");
+			servico.setPreco(sc.nextDouble());
+		} catch (ProgramException e) {
+			System.out.println(e.getMessage());
+			sc.nextLine();
+			addPreco(servico, sc);
+		}
+		sc.nextLine();
 	};
-	
-	public static Servico addStatus(Servico servico, Scanner sc) {
-		
-		System.out.print("Status (NAO_INICIADO/INICIADO/COMPLETADO): ");
-		servico.setStatus(Status.valueOf(sc.next()));
-	
-		return servico;
+
+	private static String addStatus(Scanner sc) {
+
+		System.out.print("Status: \n1 - NAO_INICIADO \n2 - INICIADO \n3 - COMPLETADO \n4 - OUTROS: ");
+		String valor = sc.nextLine();
+
+		return valor;
 	};
-	
 
 }

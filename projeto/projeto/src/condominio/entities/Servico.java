@@ -5,16 +5,19 @@ import java.util.Date;
 
 import condominio.entities.enums.Status;
 import condominio.entities.enums.TiposDeServico;
+import condominio.exceptions.ProgramException;
 
 public class Servico {
 	
 	private TiposDeServico tipo;
 	private Empresa empresa;
-	private Date initialData;
+	private Date initialData = new Date(0L);
 	private Double preco;
 	private Status status;
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+	
 	
 	public Servico() {
 		
@@ -68,21 +71,8 @@ public class Servico {
 
 
 	public void setPreco(Double preco) {
+		validaPreco(preco);
 		this.preco = preco;
-	}
-
-
-	public static boolean testaPreco(double preco) {
-		
-		if (preco < 0) {
-			System.out.println("O preço precisa ser um valor POSITIVO: ");
-			return true;
-		}
-		else {
-			
-			return false;
-		}
-		
 	}
 
 
@@ -94,15 +84,23 @@ public class Servico {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	private void validaPreco(Double preco) {
+		if(preco < 0) {
+			throw new ProgramException("O preço precisa ser um valor maior que zero.");
+		}
+	}
+	
+	
 
 
 	@Override
 	public String toString() {
-		return "\ntipo: " + tipo 
+		return "\ntipo: " + this.tipo 
 				+ "\nEmpresa: " + empresa 
-				+ "\nData Inicial: " + sdf.format(initialData) 
-				+ "\nPreco: R$ " + String.format("%.2f", preco)
-				+ "\ntatus: " + status;
+				+ "\nData Inicial: " + this.sdf.format(initialData) 
+				+ "\nPreco: R$ " + String.format("%.2f", this.preco)
+				+ "\nStatus: " + this.status;
 	}
 
 	
