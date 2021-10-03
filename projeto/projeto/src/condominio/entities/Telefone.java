@@ -13,11 +13,6 @@ public class Telefone {
 
 	}
 
-	public Telefone(TiposDeTelefone tipo, String ddd, String numero) {
-		this.tipo = tipo;
-		this.ddd = ddd;
-		this.numero = numero;
-	}
 
 	public TiposDeTelefone getTipo() {
 		return tipo;

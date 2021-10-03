@@ -56,9 +56,8 @@ public class UI {
 
 		Servico servico = new Servico();
 
-		System.out.print("É um serviço periódico? (s/n): "); // Mudar a pergunta??
-		System.out.print(">>> ");
-
+		System.out.print("É um serviço periódico? (s/n): "); 
+		
 		if (aceita(sc)) {
 			servico = new ServicoPeriodico();
 		}
@@ -101,7 +100,7 @@ public class UI {
 
 		dados.setEndereco(criaEndereco(sc));
 
-		sc.nextLine();
+		//sc.nextLine();
 		System.out.print("CNPJ: ");
 		dados.setCnpj(sc.nextLine());
 
@@ -118,7 +117,9 @@ public class UI {
 		if (aceita(sc)) {
 			addDadosEndereco(endereco, sc);
 		}
-		
+		else {
+			sc.nextLine();
+		}
 		
 		return endereco;
 
@@ -246,7 +247,8 @@ public class UI {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			data = sdf.parse(sc.next());
 		} catch (ParseException e) {
-			System.out.println("Invalid date format");
+			System.out.print("A data precisa ser (dd/MM/yyyy): ");
+			modificaData(data, sc);
 		}
 
 	};

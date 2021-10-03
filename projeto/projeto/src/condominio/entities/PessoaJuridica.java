@@ -10,12 +10,6 @@ public abstract class PessoaJuridica {
 		
 	}
 
-	public PessoaJuridica(String nome, Endereco endereco, String cnpj) {
-		this.nome = nome;
-		this.endereco = endereco;
-		this.cnpj = cnpj;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -42,9 +36,9 @@ public abstract class PessoaJuridica {
 
 	@Override
 	public String toString() {
-		return "Nome: " + this.nome 
-				+ "\nendereco: " + this.endereco 
-				+ "\ncnpj=" + this.cnpj;
+		return "Nome: " + nome 
+				+ "\nendereco: " + endereco 
+				+ "\ncnpj=" + cnpj;
 	}
 
 	

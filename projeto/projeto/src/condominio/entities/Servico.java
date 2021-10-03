@@ -23,16 +23,6 @@ public class Servico {
 		
 	}
 
-
-	public Servico(TiposDeServico tipo, Empresa empresa, Date initialData, Double preco, Status status) {
-		this.tipo = tipo;
-		this.empresa = empresa;
-		this.initialData = initialData;
-		this.preco = preco;
-		this.status = status;
-	}
-
-
 	public TiposDeServico getTipo() {	
 		return tipo;
 	}
@@ -68,7 +58,6 @@ public class Servico {
 		return preco;
 	}
 	
-
 
 	public void setPreco(Double preco) {
 		validaPreco(preco);

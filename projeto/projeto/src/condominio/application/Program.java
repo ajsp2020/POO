@@ -65,7 +65,7 @@ public class Program {
 
 			case 2: {
 
-				if (UI.clienteExiste(cliente)) { // Checando se o cliente existe
+				if (!UI.clienteExiste(cliente)) { // Checando se o cliente existe
 					System.out.println("Adicione um cliente.");
 					sc.nextLine();
 					sc.nextLine(); // Tem dois pq o p1rograma não esta parando com um só

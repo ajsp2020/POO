@@ -12,10 +12,6 @@ public class Empresa extends PessoaJuridica{
 		
 	}
 
-	public Empresa(String nome, Endereco endereco, String cnpj) {
-		super(nome, endereco, cnpj); 
-	}
-
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
@@ -30,10 +26,10 @@ public class Empresa extends PessoaJuridica{
 
 	@Override
 	public String toString() {
-		return "Nome: " + getNome() 
-				+ "\nEndereco: " + getEndereco()
-				+ "\nCnpj: " + getCnpj()
-				+ "telefones: " + telefones ;
+		return "\nNome: " + this.getNome() 
+				+ "\nEndereco: " + this.getEndereco()
+				+ "\nCnpj: " + this.getCnpj()
+				+ "\ntelefones: " + telefones ;
 	}
 	
 }

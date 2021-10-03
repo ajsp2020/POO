@@ -13,11 +13,6 @@ public class Cliente extends PessoaJuridica{
 		super();
 	}
 
-	public Cliente(String nome, Endereco endereco, String cnpj, String sindico) {
-		super(nome, endereco, cnpj);
-		this.sindico = sindico;
-	}
-
 	public List<Servico> getServicos() {
 		return servicos;
 	}
