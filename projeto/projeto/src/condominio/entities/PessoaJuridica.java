@@ -1,16 +1,16 @@
 package condominio.entities;
 
-public abstract class Dados {
+public abstract class PessoaJuridica {
 	
 	private String nome;
 	private Endereco endereco;
 	private String cnpj;
 	
-	public Dados() {
+	public PessoaJuridica() {
 		
 	}
 
-	public Dados(String nome, Endereco endereco, String cnpj) {
+	public PessoaJuridica(String nome, Endereco endereco, String cnpj) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cnpj = cnpj;
@@ -42,9 +42,9 @@ public abstract class Dados {
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome 
-				+ "\nendereco: " + endereco 
-				+ "\ncnpj=" + cnpj;
+		return "Nome: " + this.nome 
+				+ "\nendereco: " + this.endereco 
+				+ "\ncnpj=" + this.cnpj;
 	}
 
 	

@@ -3,10 +3,8 @@ package condominio.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import condominio.application.UI;
-
 // Criando uma classe cliente e adicionando os métodos. 
-public class Cliente extends Dados{
+public class Cliente extends PessoaJuridica{
 	
 	private List<Servico> servicos = new ArrayList<>();
 	private String sindico;
@@ -44,7 +42,7 @@ public class Cliente extends Dados{
 	@Override
 	public String toString() {
 		return ">> Dados do Cliente <<"
-				+ "\nsindico: " + sindico 
+				+ "\nsindico: " + this.sindico 
 				+ "\nDados do condomínio:\n"
 				+ super.toString()
 				+ "\nservicos: " 

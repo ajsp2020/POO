@@ -3,7 +3,7 @@ package condominio.entities;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Empresa extends Dados{
+public class Empresa extends PessoaJuridica{
 	
 	private List<Telefone> telefones = new ArrayList<Telefone>();
 	

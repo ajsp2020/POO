@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import condominio.entities.Cliente;
-import condominio.entities.Dados;
+import condominio.entities.PessoaJuridica;
 import condominio.entities.Empresa;
 import condominio.entities.Endereco;
 import condominio.entities.Servico;
@@ -43,7 +43,7 @@ public class UI {
 
 	protected static Cliente addDadosCondominio(Cliente cliente, Scanner sc) {
 
-		Dados dados = criaDados(cliente, sc);
+		PessoaJuridica dados = criaDados(cliente, sc);
 		cliente = (Cliente) dados;
 
 		System.out.print("Sindico: ");
@@ -93,7 +93,7 @@ public class UI {
 
 	};
 
-	private static Dados criaDados(Dados dados, Scanner sc) {
+	private static PessoaJuridica criaDados(PessoaJuridica dados, Scanner sc) {
 
 		sc.nextLine();
 		System.out.print("Nome: ");
@@ -169,7 +169,10 @@ public class UI {
 	private static void addDadosTelefone(Telefone telefone, Scanner sc) {
 
 		try {
-			System.out.println("Tipo: \n1 - FIXO \n2 - CELULAR ");
+			System.out.println("Tipo: \n"
+					+ "1 - FIXO \n"
+					+ "2 - CELULAR ");
+			
 			System.out.print(">>> ");
 			telefone.setTipo(TiposDeTelefone.pegaTelefones(sc.nextLine()));
 
@@ -188,7 +191,10 @@ public class UI {
 
 	private static String addTipos(Scanner sc) {
 
-		String[] tipos = { "1 - MANUTENÇÃO", "2 - PINTURA", "3 - LIMPEZA", "4 - SUBSTITUIÇÃO" };
+		String[] tipos = { "1 - MANUTENÇÃO", 
+						"2 - PINTURA", 
+						"3 - LIMPEZA", 
+						"4 - SUBSTITUIÇÃO" };
 
 		for (String lista : tipos) {
 			System.out.println(lista);
@@ -211,7 +217,7 @@ public class UI {
 
 	private static void addDadosEmpresa(Empresa empresa, Scanner sc) {
 
-		Dados dados = criaDados(empresa, sc);
+		PessoaJuridica dados = criaDados(empresa, sc);
 		empresa = (Empresa) dados;
 
 		System.out.println("Deseja adicionar um numero? (S/N)");
@@ -260,7 +266,11 @@ public class UI {
 
 	private static String addStatus(Scanner sc) {
 
-		System.out.println("Status: \n1 - NAO_INICIADO \n2 - INICIADO \n3 - COMPLETADO \n4 - OUTROS: ");
+		System.out.println("Status: \n"
+				+ "1 - NAO_INICIADO \n"
+				+ "2 - INICIADO \n3 - COMPLETADO \n"
+				+ "4 - OUTROS: ");
+		
 		System.out.print(">>> ");
 		String valor = sc.nextLine();
 
