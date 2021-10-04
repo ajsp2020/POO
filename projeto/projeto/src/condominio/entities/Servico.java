@@ -11,7 +11,7 @@ public class Servico {
 	
 	private TiposDeServico tipo;
 	private Empresa empresa;
-	private Date initialData = new Date(0L);
+	private Date initialData;
 	private Double preco;
 	private Status status;
 	
@@ -85,11 +85,11 @@ public class Servico {
 
 	@Override
 	public String toString() {
-		return "\ntipo: " + this.tipo 
-				+ "\nEmpresa: " + empresa 
-				+ "\nData Inicial: " + this.sdf.format(initialData) 
-				+ "\nPreco: R$ " + String.format("%.2f", this.preco)
-				+ "\nStatus: " + this.status;
+		return "\nTIPO: " + this.tipo 
+				+ "\nNOME DA EMPRESA: " + empresa.getNome() 
+				+ "\nDATA: " + this.sdf.format(initialData) 
+				+ "\nPREÇO: R$ " + String.format("%.2f", this.preco)
+				+ "\nSTATUS: " + this.status;
 	}
 
 	

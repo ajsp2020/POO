@@ -36,9 +36,9 @@ public abstract class PessoaJuridica {
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome 
-				+ "\nendereco: " + endereco 
-				+ "\ncnpj=" + cnpj;
+		return "NOME: " + nome 
+				+ "\nCNPJ: " + cnpj
+				+ "\nENDEREÇO: " + endereco ;
 	}
 
 	

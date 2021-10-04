@@ -2,10 +2,10 @@ package condominio.entities;
 
 import java.util.Date;
 
-public class ServicoPeriodico extends Servico{
+public class ServicoPeriodico extends Servico {
 
 	private Date nextDate;
-	
+
 	public ServicoPeriodico() {
 		super();
 	}
@@ -22,6 +22,5 @@ public class ServicoPeriodico extends Servico{
 	public String toString() {
 		return " [nextDate=" + nextDate + "]";
 	}
-	
-	
+
 }

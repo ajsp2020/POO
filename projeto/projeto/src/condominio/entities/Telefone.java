@@ -41,10 +41,7 @@ public class Telefone {
 		this.numero = numero;
 	}
 
-	@Override
-	public String toString() {
-		return "" + tipo + ":" + "(" + ddd + ")" + "numero" + numero;
-	}
+	
 
 	private void validaDdd(String ddd) {
 		if (ddd.length() != 2) {
@@ -56,6 +53,11 @@ public class Telefone {
 		if (numero.length() != 9) {
 			throw new ProgramException("Adicione um número válido");
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "\n" + tipo + ":" + " (" + ddd + ") " + numero;
 	}
 
 }

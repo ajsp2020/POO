@@ -26,10 +26,10 @@ public class Empresa extends PessoaJuridica{
 
 	@Override
 	public String toString() {
-		return "\nNome: " + this.getNome() 
-				+ "\nEndereco: " + this.getEndereco()
-				+ "\nCnpj: " + this.getCnpj()
-				+ "\ntelefones: " + telefones ;
+		return "\nNOME DA EMPRESA: " + this.getNome() 
+				+ "\nENDEREÇO: " + this.getEndereco()
+				+ "\nCNPJ: " + this.getCnpj()
+				+ "\nTELEFONE: \n" + telefones ;
 	}
 	
 }

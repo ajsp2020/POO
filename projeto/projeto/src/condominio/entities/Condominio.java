@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Criando uma classe cliente e adicionando os métodos. 
-public class Cliente extends PessoaJuridica{
+public class Condominio extends PessoaJuridica{
 	
 	private List<Servico> servicos = new ArrayList<>();
 	private String sindico;
 	
-	public Cliente() {
+	public Condominio() {
 		super();
 	}
 
@@ -34,17 +34,24 @@ public class Cliente extends PessoaJuridica{
 	}
 	
 
-	@Override
+	@Override 
 	public String toString() {
-		return ">> Dados do Cliente <<"
-				+ "\nsindico: " + this.sindico 
-				+ "\nDados do condomínio:\n"
+		return "***************************************\n"
+				+">>>       DADOS DO CONDOMINIO       <<<\n"
+				+ "\nSINDICO: " + this.sindico 
 				+ super.toString()
-				+ "\nservicos: " 
+				+ "\n>>> SERVIÇOS <<< \n" 
 				+ servicos 
-				+ 
-						 "";
+				+ "\n***************************************";
 	}
 	
+	public String toString(String string) {
+		return "***************************************\n"
+				+">>>       DADOS DO CONDOMINIO       <<<\n"
+				+"NOME: " + super.getNome() + "\n"
+				+"SINDICO: " + this.sindico + "\n"
+				+"***************************************"; 
+
+	}
 	
 }
