@@ -42,7 +42,6 @@ public class Telefone {
 	}
 
 	
-
 	private void validaDdd(String ddd) {
 		if (ddd.length() != 2) {
 			throw new ProgramException("O ddd precisa possuir dois valores");

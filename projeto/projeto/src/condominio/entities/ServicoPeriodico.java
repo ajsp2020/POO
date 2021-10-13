@@ -1,10 +1,13 @@
 package condominio.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ServicoPeriodico extends Servico {
 
 	private Date nextDate;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 
 	public ServicoPeriodico() {
 		super();
@@ -20,7 +23,8 @@ public class ServicoPeriodico extends Servico {
 
 	@Override
 	public String toString() {
-		return " [nextDate=" + nextDate + "]";
+		return super.toString() 
+				+ "\nPROXIMA DATA: " + this.sdf.format(nextDate);			
 	}
 
 }

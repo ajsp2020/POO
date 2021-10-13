@@ -18,7 +18,6 @@ public class Servico {
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	
-	
 	public Servico() {
 		
 	}
@@ -79,9 +78,6 @@ public class Servico {
 			throw new ProgramException("O preço precisa ser um valor maior que zero.");
 		}
 	}
-	
-	
-
 
 	@Override
 	public String toString() {

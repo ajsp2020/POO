@@ -1,13 +1,13 @@
 package condominio.entities;
 
 public abstract class PessoaJuridica {
-	
+
 	private String nome;
 	private Endereco endereco;
 	private String cnpj;
-	
+
 	public PessoaJuridica() {
-		
+
 	}
 
 	public String getNome() {
@@ -36,10 +36,7 @@ public abstract class PessoaJuridica {
 
 	@Override
 	public String toString() {
-		return "NOME: " + nome 
-				+ "\nCNPJ: " + cnpj
-				+ "\nENDEREÇO: " + endereco ;
+		return "NOME: " + nome + "\nCNPJ: " + cnpj + "\nENDEREÇO: " + endereco;
 	}
 
-	
 }

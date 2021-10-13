@@ -53,5 +53,6 @@ public class Condominio extends PessoaJuridica{
 				+"***************************************"; 
 
 	}
-	
+
+
 }
